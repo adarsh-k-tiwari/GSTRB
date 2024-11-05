@@ -19,20 +19,12 @@ The German Traffic Sign Benchmark is a multi-class, single-image classification 
 # Commented out IPython magic to ensure Python compatibility.
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
-import warnings
-warnings.filterwarnings('ignore')
-# %matplotlib inline
 
-import shutil
 import torch.nn as nn
 import torch
 import torch.utils.data as data
 import torchvision.transforms as transforms
-from torchvision.datasets import GTSRB
-import os
-from PIL import Image
+
 
 # root_dir = '/root/GTSRB'
 
@@ -42,34 +34,6 @@ transform = transforms.Compose([
     transforms.Resize((32, 32)),  # Resize images to 32x32 pixels
     transforms.ToTensor(),         # Convert images to PyTorch tensors
 ])
-
-# Load the training dataset
-# gtsrb_train = GTSRB(root=root_dir, split='train', transform=transform, download=True)
-
-# # Load the test dataset
-# gtsrb_test = GTSRB(root=root_dir, split='test', transform=transform, download=True)
-
-# print(f'Number of training samples: {len(gtsrb_train)}')
-# print(f'Number of test samples: {len(gtsrb_test)}')
-
-# # Create a DataLoader to load the data in batches
-# train_loader = data.DataLoader(gtsrb_train, batch_size=6, shuffle=True)
-
-# # Function to display a batch of images
-# def show_images(images, labels):
-#     fig, axes = plt.subplots(1, len(images), figsize=(12, 3))
-#     for i, (image, label) in enumerate(zip(images, labels)):
-#         axes[i].imshow(image.permute(1, 2, 0))  # Convert from Tensor (C, H, W) to (H, W, C)
-#         axes[i].set_title(f'Label: {label}')
-#         axes[i].axis('off')
-#     plt.show()
-
-# # Load a batch of images and labels
-# data_iter = iter(train_loader)
-# images, labels = next(data_iter)
-
-# # Show the images
-# show_images(images, labels)
 
 class GTSRBModel(nn.Module):
     def __init__(self):
@@ -90,53 +54,3 @@ class GTSRBModel(nn.Module):
       return x
 
 model = GTSRBModel()
-
-# import torch.optim as optim
-
-# Define the loss function and optimizer
-# criterion = nn.CrossEntropyLoss()
-# optimizer = optim.Adam(model.parameters(), lr=0.001)
-
-# for epoch in range(10):
-#     running_loss = 0.0
-#     for i, data in enumerate(train_loader, 0):
-#         inputs, labels = data
-#         optimizer.zero_grad()
-#         outputs = model(inputs)
-#         loss = criterion(outputs, labels)
-#         loss.backward()
-#         optimizer.step()
-#         running_loss += loss.item()
-
-#     print(f'Epoch {epoch + 1}, Loss: {running_loss / len(train_loader)}')
-#     running_loss = 0.0
-
-# print('Training finished.')
-
-# PATH = './gtsrb_net.pth'
-# torch.save(model.state_dict(), PATH)
-
-# PATH = './model.pth'
-# torch.save(model, PATH)
-
-# net = GTSRBModel()
-# net.load_state_dict(torch.load(PATH, weights_only=True))
-
-# outputs = net(images)
-
-# test_loader = torch.utils.data.DataLoader(gtsrb_test, batch_size=6, shuffle=True)
-# correct = 0
-# total = 0
-# # since we're not training, we don't need to calculate the gradients for our outputs
-# with torch.no_grad():
-#     for data in test_loader:
-#         images, labels = data
-#         # calculate outputs by running images through the network
-#         outputs = net(images)
-#         # the class with the highest energy is what we choose as prediction
-#         _, predicted = torch.max(outputs.data, 1)
-#         total += labels.size(0)
-#         correct += (predicted == labels).sum().item()
-
-# print(f'Accuracy of the network on the 10000 test images: {100 * correct // total} %')
-
