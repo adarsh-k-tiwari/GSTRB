@@ -1,0 +1,5 @@
+[theme]
+primaryColor = "#FFC500"  # You can choose your preferred primary color
+backgroundColor = "#FFFFFF"  # Set the background color to white for a light theme
+secondaryBackgroundColor = "#F0F2F6"  # Light grey for secondary background
+textColor = "#31333F"  # Set text color to black
