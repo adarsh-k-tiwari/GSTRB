@@ -20,37 +20,49 @@ The German Traffic Sign Benchmark is a multi-class, single-image classification 
 import pandas as pd
 import numpy as np
 
-import torch.nn as nn
 import torch
-import torch.utils.data as data
+import torch.nn as nn
+import torch.optim as optim
 import torchvision.transforms as transforms
-
-
-# root_dir = '/root/GTSRB'
-
-# os.makedirs(root_dir, exist_ok=True)
-
-transform = transforms.Compose([
-    transforms.Resize((32, 32)),  # Resize images to 32x32 pixels
-    transforms.ToTensor(),         # Convert images to PyTorch tensors
-])
+from torch.utils.data import DataLoader
+import torch.nn.functional as F
+from torchvision.datasets import GTSRB
 
 class GTSRBModel(nn.Module):
     def __init__(self):
         super(GTSRBModel, self).__init__()
-        self.conv1 = nn.Conv2d(3, 32, kernel_size=3, stride=1, padding=1)
-        self.relu1 = nn.ReLU()
-        self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
-        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, stride=1, padding=1)
-        self.relu2 = nn.ReLU()
-        self.fc1 = nn.Linear(64 * 8 * 8, 512)
+
+        # Building 3 deep convolutional layers
+        self.conv1 = nn.Conv2d(3, 32, kernel_size=3, padding=1)
+        self.bn1 = nn.BatchNorm2d(32)
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, padding=1)
+        self.bn2 = nn.BatchNorm2d(64)
+        self.conv3 = nn.Conv2d(64, 128, kernel_size=3, padding=1)
+        self.bn3 = nn.BatchNorm2d(128)
+
+        # Pooling layer
+        self.pool = nn.MaxPool2d(2, 2)
+
+        # Calculate the size of flattened features
+        self.flatten_size = 128 * 3 * 3
+        # After 3 pooling layers: 28x28 -> 14x14 -> 7x7 -> 3x3
+
+        # Building fully connected layers
+        self.fc1 = nn.Linear(self.flatten_size, 512)
+        self.bn4 = nn.BatchNorm1d(512)
         self.fc2 = nn.Linear(512, 43)
+
+        # Adding a dropout layer
+        self.dropout = nn.Dropout(0.5)
+
+    # for forward propagation
     def forward(self, x):
-      x = self.pool(nn.functional.relu(self.conv1(x)))
-      x = self.pool(nn.functional.relu(self.conv2(x)))
-      x = x.view(-1, 64 * 8 * 8)
-      x = nn.functional.relu(self.fc1(x))
-      x = self.fc2(x)
-      return x
+        x = self.pool(F.relu(self.bn1(self.conv1(x))))
+        x = self.pool(F.relu(self.bn2(self.conv2(x))))
+        x = self.pool(F.relu(self.bn3(self.conv3(x))))
+        x = x.view(-1, self.flatten_size)
+        x = self.dropout(F.relu(self.bn4(self.fc1(x))))
+        x = self.fc2(x)
+        return x
 
 model = GTSRBModel()
