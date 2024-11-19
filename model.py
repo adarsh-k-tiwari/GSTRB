@@ -44,7 +44,7 @@ class GTSRBModel(nn.Module):
         self.pool = nn.MaxPool2d(2, 2)
 
         # Calculate the size of flattened features
-        self.flatten_size = 128 * 3 * 3
+        self.flatten_size = 128 * 4 * 4
         # After 3 pooling layers: 28x28 -> 14x14 -> 7x7 -> 3x3
 
         # Building fully connected layers
