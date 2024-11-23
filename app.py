@@ -7,6 +7,7 @@ import torchvision.transforms as transforms
 from model import GTSRBModel
 import random
 import os
+import pandas as pd
 
 # Set page title and icon
 st.set_page_config(
@@ -322,16 +323,59 @@ elif st.session_state.page == 'research':
     
     # Content for the blog post
     st.subheader("Abstract")
-    st.write("This report explores the German Traffic Sign Recognition Benchmark (GTSRB) dataset, as a foundation for developing intelligent navigation systems. Using Convolutional Neural Networks (CNNs), we explore the potential of this dataset to enable more accurate and responsive traffic sign detection, contributing to road safety and efficient autonomous navigation.")
+    st.write("As self-driving vehicle technology continues to evolve, recognizing traffic signs is becoming increasingly essential. Utilizing the German Traffic Sign Recognition Benchmark (GTSRB) dataset, up to 43 types of traffic signs can be classified. The topic of this study is to combine various pre-processing techniques to refine the model\'s accuracy, focusing on applying to various types convolutional neural networks (CNNs). While 2 state-of-the-art CNN architectures (ResNet and MobileNet) and additional 3 models were tested (Baseline CNN, Self Attention-CNN and N-Adam CNN), the results highlight that CNNs with Spatial SelfAttention mechanisms reached the highest validation accuracy. The proposed technique can be applied to other downstream tasks for traffic sign detection.")
     st.divider()
 
     st.subheader("Introduction")
-    st.write("The German Traffic Sign Recognition Benchmark (GTSRB) dataset is a well-established resource for research in traffic sign classification and recognition. This dataset is highly regarded in the computer vision community for developing and benchmarking traffic sign recognition models that contribute to applications in intelligent transportation systems (ITS), advanced driver assistance systems (ADAS), and autonomous driving. GTSRB has become essential for experiments that target real-world road conditions and ensure road safety through accurate traffic sign classification. The proposed approach aims to leverage these insights by designing and training a CNN that can recognize traffic signs accurately, potentially achieving a similar high performance. Through this experiment, we anticipate contributing further to the development of safer navigation systems.")
+    st.write("Accurately recognizing traffic signs is a critical component of intelligent transportation systems can be effective in various systems, ranging from advanced driver assistance systems (ADAS) to fully autonomous vehicles. Traffic sign recognition ensures road safety as well as enhancing driving efficiency by providing real-time information to drivers and vehicle systems. However, recognizing accurate traffic signs can face difficulties due to different circumstances such as lighting, weather conditions, and the diverse designs of traffic signs across regions, as shown in figure 1:")
+    
+    st.image('signs.png', caption='Fig. 1: Sample Images from Training Set (top) and Testing Set (bottom).', width=600)
     st.divider()
 
-    st.subheader("Method")
-    st.write("The GTSRB dataset contains 43 distinct classes of traffic signs and a substantial number of labeled images—26,640 for training and 12,630 for testing. To process this dataset, we will use a Convolutional Neural Network (CNN), a model well-suited for image classification tasks due to its ability to capture spatial hierarchies and patterns within images. CNNs are particularly effective for traffic sign recognition, where robust detection and classification of visual cues are critical. Numerous studies have shown CNN-based models to be effective in handling traffic signs across varying light conditions, perspectives, and partial occlusions, which are common in real-world driving scenarios. For instance, CNN models have achieved high accuracy on GTSRB by employing regularization techniques like dropout and batch normalization, and modifications such as attention mechanisms, which enhance the model's focus on crucial image regions(e.g., using SE and VGG-16 based architectures)​<- OUR BASE MODEL->")
+    st.subheader("Methodology")
+    st.write("There are three stages in the proposed pipeline. First, the images are subjected to one of three different sets of image transformations, each of which produces their splits for  testing, validation, and training. Each transformed image set is then used to train and evaluate the models in the model set. Finally, the performance of each model is compared across all transformed feature sets")
+    st.image('Model_Pipeline.png', caption='Fig. 2: Model Pipeline', width=600)
+    st.markdown("""**1. Pre-Processing Techniques:**
+    - Grayscale conversion, CLAHE (Contrast Limited Adaptive Histogram Equalization), cropping, sharpening, rotation, affine transformation, and color jitter were employed to enhance image features.
+- Three distinct pre-processing pipelines were designed:
+    - Set 1: Focused on contrast enhancement (Grayscale → Cropping → CLAHE → Sharpening).
+    - Set 2: Included data augmentation (Cropping → Rotation → Affine → Color Jitter).
+    - Set 3: Baseline with only cropping and normalization.""")
+    st.image('Feauter_processing.png', width=500, caption='Fig. 3: Images after different transformations')
+    st.markdown("""**2. Deep Learning Architectures Evaluated:**
+- Baseline CNN: A standard CNN with max-pooling and dropout layers.
+- CNN + NAdam: Integrated Nesterov Accelerated Gradient (NAdam) optimizer for faster convergence.
+- CNN with Attention: Incorporated spatial self-attention modules for enhanced feature extraction.
+- ResNet-18 and MobileNetv2: Pre-trained state-of-the-art models fine-tuned on the GTSRB dataset.""")
+    st.image('model.png', width=500, caption='Fig. 4: Model Architecture for CNN with Self-Attention')
+    st.markdown("""**3. Experimental Findings:**
+- CNN with self-attention mechanisms achieved the highest accuracy (97.28%) across all pre-processing sets.
+- Feature Set 1 (focused on contrast enhancements) consistently outperformed the others, confirming the effectiveness of pre-processing in improving model accuracy.
+- Attention CNN excelled in precision, recall, and F1 score metrics, demonstrating robust and reliable performance.
+- Visualization of attention maps showed the model effectively focused on critical regions of traffic signs while ignoring irrelevant background details.""")
+    st.image('model_loss.jpg', width=800,  caption='Fig. 5: Loss vs Epochs and Accuracy vs Epochs across all models built')
+    st.markdown("""**4. Training Setup:**
+- The models were trained on 26,640 images (split into 80% training and 20% validation) and tested on 12,630 images.
+- Hyperparameters such as learning rate, batch size, and epochs were optimized using GridSearch.
+- All five models were trained and validated on three pre-processing sets, which comprised 26,640 images (80% training and 20% validation).
+- Results showed that CNN with Self-Attention trained on Set 1 consistently achieved the highest performance across metrics, leveraging the benefits of contrast-enhancing transformations like CLAHE and sharpening.""")
+    st.write(pd.DataFrame({
+        'Pre-processing/Models' : ['Set 1', 'Set 2', 'Set 3'],
+'Baseline CNN' : ['92.00%', '72.92%', '83.89%'],
+'CNN + Attention Module' : ['97.28%', '96.56%', '94.19%'],
+'ResNet-18' : ['94.38%', '91.88%', '94.16%'],
+'MobileNetv2' : ['96.04%', '94.49%', '95.08%'],
+'CNN + N Adam' : ['93.30%', '93.40%', '94.00%'],
+    }, index=None))
 
+    st.markdown("""**Conclusion and Future Work:**
+
+- This study demonstrates combining pre-processing techniques with deep learning models for traffic sign recognition. Using the GTSRB dataset from PyTorch, multiple preprocessing pipelines and model architectures were tested, with the conclusion that CNNs with Spatial Self-Attention mechanisms reached the highest test accuracy of 97.28%. The attention map visualization highlights that the model focuses on key features while also giving less importance to the dark background areas.
+- This approach can be applied internationally to recognize traffic signs from any country, providing accurate and reliable detection for autonomous vehicles, which can alert drivers to traffic signs and reduce the risk of accidents. Additionally, the model can assess traffic sign conditions, identifying those that are damaged, poorly maintained, or missing.
+                
+This projects contributes to advancing intelligent transportation systems, showcasing high accuracy and practical applicability in traffic sign recognition tasks.""")
+                
+    st.markdown('<div class="button-container"><strong><center>You can test the model by clicking on the \'Model Demo\' button.</center></strong> </div>', unsafe_allow_html=True)
     col1, col2, col3, col4 = st.columns([4,2,2,4], vertical_alignment="center")
     st.markdown('<div class="button-container">', unsafe_allow_html=True)
     with col2:
@@ -386,7 +430,10 @@ elif st.session_state.page == 'demo':
     </style> """, unsafe_allow_html=True)
 
     st.title("Machine Learning Model Demo")
-    
+    st.markdown("""To test the model, you have two options:
+
+- **Upload an Image**: Select an image of your choice and click the 'Predict' button to see the model's prediction.
+- **Surprise Me**: Let the model randomly select 5 images from the test dataset and display their predictions.""")
     # Example inputs for the model
     input_1 = st.file_uploader(label='', accept_multiple_files=False, help='Please upload the image in ppm format only')
     is_button_disabled = input_1 is None
