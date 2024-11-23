@@ -24,14 +24,6 @@ Large, lifelike database
 https://ecen-gtsrb.streamlit.app/
 
 
-## Documentation
+## Report
 
-[Documentation](Coming Soon)
-
-
-## Tech Stack
-
-**Client:** Stremlit
-
-**Model:** Pytorch
-
+[Report](https://drive.google.com/file/d/1-Cq3amnH3rXuSc9BKq0B3u01fprC-mLV/view?usp=sharing)

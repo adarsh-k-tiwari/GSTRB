@@ -209,6 +209,9 @@ def go_to_page(page_name):
 # Landing Page
 if st.session_state.page == 'landing':
 
+    st.markdown('<h1 style="text-align: center"><br><br><span style="background-color:#FFC500; color:#FFFFFF; font-family: Poppins, sans-serif; font-weight: 600; font-style: normal;">  A I  -  P O W E R E D </span></h1>', unsafe_allow_html=True)
+    st.markdown('<div style="text-align: center; font-size: 8em; line-height:95%;font-family: Roboto, sans-serif; font-weight: 900; font-style: normal;"><strong>Traffic Sign</strong><br><div style="color: #FFC500"><strong>Recognition</strong></div></div>', unsafe_allow_html=True)
+    st.markdown('<h4 style="text-align: center; color: #A9A9A9"><br>Harnessing the GTSRB Dataset for Smarter Navigation and Safer Roads</h4>', unsafe_allow_html=True)
     # Styling the landing page buttons
     st.markdown(f"""
     <style>
@@ -220,7 +223,7 @@ if st.session_state.page == 'landing':
             height: 1em;
             width: 100%;
             border-radius: 35px;
-            margin-top: 20;
+            # margin-top: 20;
             justify-content: center;
         }}
 
@@ -237,7 +240,7 @@ if st.session_state.page == 'landing':
                 font-size: 0.6rem;
                 padding: 0.5rem;
                 width: 100%;
-                margin-top: 2em;
+                # margin-top: 2em;
             }}
         }}
     
@@ -247,7 +250,7 @@ if st.session_state.page == 'landing':
                 font-size: 1rem;
                 padding: 0.75rem;
                 width: 100%;
-                margin-top: 10em;
+                # margin-top: 10em;
             }}
         }}
     
@@ -257,7 +260,7 @@ if st.session_state.page == 'landing':
                 font-size: 1.2rem;
                 padding: 1rem;
                 width: 100%;
-                margin-top: 20rem;
+                # margin-top: 20rem;
             }}
         }}
                 
@@ -266,12 +269,12 @@ if st.session_state.page == 'landing':
                 font-size: 1.2rem;
                 padding: 1rem;
                 width: 100%;
-                margin-top: 20em;
+                # margin-top: 20em;
             }}
         }}
 
     </style> """, unsafe_allow_html=True)
-    set_background(landing_bg_url)
+    set_background(main_bg_url)
 
     col1, col2, col3, col4= st.columns([4,2,2,4], vertical_alignment="center")
     # st.html("<style> .main {overflow: hidden} </style>")
