@@ -1,3 +1,5 @@
+**NOTICE:**
+```This is the deployment repo. Please head to ![Redirect](https://github.com/nehayj100/Traffic-Sign-Recognition-Using-the-GTSRB-Dataset) for more information```
 
 # German Traffic Sign Recognition Benchmark
 ![](https://github.com/adarsh-k-tiwari/GSTRB/blob/main/GTSRB.png?raw=true)
