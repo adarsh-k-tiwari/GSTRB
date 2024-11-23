@@ -138,48 +138,6 @@ def set_background(image_url):
         }}
         [data-testid="stHeader"]{{
         background-color: transparent;}}
-        
-        /* Mobile screens */
-        @media screen and (max-width: 640px) {{
-            [data-testid="stAppViewContainer"]{{
-            background-image: url("{image_url}");
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            }}
-        }}
-
-        /* Tablet screens */
-        @media screen and (min-width: 641px) and (max-width: 1024px) {{
-            [data-testid="stAppViewContainer"]{{
-            background-image: url("{image_url}");
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            top: 0;
-            left: 0;
-            width: 70%;
-            height: 70%;
-            }}
-        }}
-
-        @media screen and (min-width: 1025px) {{
-            [data-testid="stAppViewContainer"]{{
-            background-image: url("{image_url}");
-            background-position: center;
-            background-repeat: no-repeat;
-            background-size: cover;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            }}
-        }}
-
     </style>
 """, unsafe_allow_html=True)
 
@@ -213,6 +171,7 @@ if st.session_state.page == 'landing':
     st.markdown('<div style="text-align: center; font-size: 8em; line-height:95%;font-family: Roboto, sans-serif; font-weight: 900; font-style: normal;"><strong>Traffic Sign</strong><br><div style="color: #FFC500"><strong>Recognition</strong></div></div>', unsafe_allow_html=True)
     st.markdown('<h4 style="text-align: center; color: #A9A9A9"><br>Harnessing the GTSRB Dataset for Smarter Navigation and Safer Roads</h4>', unsafe_allow_html=True)
     # Styling the landing page buttons
+    st.markdown("""<h5 style="text-align: center; word-spacing: 10px"><a href='https://colab.research.google.com/drive/1GRI-4-qkjm6P5w4fGbnLuix43o4zBSNr?usp=sharing' style="color: #FFC500">Notebok</a> <a style="color: #FFC500" href='https://github.com/nehayj100/Traffic-Sign-Recognition-Using-the-GTSRB-Dataset'>GitHub</a></h5>""",unsafe_allow_html=True)
     st.markdown(f"""
     <style>
         div.stButton > button:first-child {{
@@ -223,7 +182,6 @@ if st.session_state.page == 'landing':
             height: 1em;
             width: 100%;
             border-radius: 35px;
-            # margin-top: 20;
             justify-content: center;
         }}
 
@@ -233,46 +191,6 @@ if st.session_state.page == 'landing':
             color: #FFFFFF;
             transition: background-color 0.3s ease;
         }}
-                
-         /* Mobile screens */
-        @media screen and (max-width: 640px) {{
-            div.stButton > button {{
-                font-size: 0.6rem;
-                padding: 0.5rem;
-                width: 100%;
-                # margin-top: 2em;
-            }}
-        }}
-    
-        /* Tablet screens */
-        @media screen and (min-width: 641px) and (max-width: 1024px) {{
-            div.stButton > button {{
-                font-size: 1rem;
-                padding: 0.75rem;
-                width: 100%;
-                # margin-top: 10em;
-            }}
-        }}
-    
-        /* Desktop screens */
-        @media screen and (min-width: 1025px) {{
-            div.stButton > button {{
-                font-size: 1.2rem;
-                padding: 1rem;
-                width: 100%;
-                # margin-top: 20rem;
-            }}
-        }}
-                
-        @media screen and (min-width: 1920px) {{
-            div.stButton > button {{
-                font-size: 1.2rem;
-                padding: 1rem;
-                width: 100%;
-                # margin-top: 20em;
-            }}
-        }}
-
     </style> """, unsafe_allow_html=True)
     set_background(main_bg_url)
 
@@ -305,22 +223,17 @@ elif st.session_state.page == 'research':
             height: 1em;
             width: 100%;
             border-radius: 35px;
-            margin-top: 2em;
             justify-content: center;
         }}
-
         div.stButton > button:first-child:hover {{
             border-color: #FFC500;
             background-color: #FFC500;
             color: #FFFFFF;
             transition: background-color 0.3s ease;
         }}
-
-        div.stButton > baseButton-secondary{{
-            margin-top: 0px;
-        }}
     </style> """, unsafe_allow_html=True)
     st.markdown('<h1 style="text-align: center;">Harnessing the GTSRB Dataset for Smarter Navigation and Safer Roads</h1>', unsafe_allow_html=True)
+    st.markdown("""<h5 style="text-align: center; word-spacing: 10px"><a href='https://colab.research.google.com/drive/1GRI-4-qkjm6P5w4fGbnLuix43o4zBSNr?usp=sharing' style="color: #FFC500">Notebok</a> <a style="color: #FFC500" href='https://github.com/nehayj100/Traffic-Sign-Recognition-Using-the-GTSRB-Dataset'>GitHub</a></h5>""",unsafe_allow_html=True)
     st.latex(
         r'''{Adarsh\>Kumar}\qquad{Hwiyoon\>Kim}\qquad {Jonathan\>Gover}\qquad{Neha\>Joshi}\qquad{Neil\>Roy}''')
     
@@ -378,7 +291,7 @@ elif st.session_state.page == 'research':
                 
 This projects contributes to advancing intelligent transportation systems, showcasing high accuracy and practical applicability in traffic sign recognition tasks.""")
                 
-    st.markdown('<div class="button-container"><strong><center>You can test the model by clicking on the \'Model Demo\' button.</center></strong> </div>', unsafe_allow_html=True)
+    st.markdown('<div class="button-container"><strong><center>You can test the model by clicking on the \'Model Demo\' button.</center></strong><br><br> </div>', unsafe_allow_html=True)
     col1, col2, col3, col4 = st.columns([4,2,2,4], vertical_alignment="center")
     st.markdown('<div class="button-container">', unsafe_allow_html=True)
     with col2:
@@ -407,7 +320,6 @@ elif st.session_state.page == 'demo':
             height: 1em;
             width: 100%;
             border-radius: 35px;
-            margin-top: 2em;
             justify-content: center;
         }}
 
@@ -424,18 +336,12 @@ elif st.session_state.page == 'demo':
             cursor: not-allowed;
             border: none;
         }}
-
-        div.stButton > baseButton-primary{{
-            margin-top: 20px;
-                width: 50%;
-        }}
-
     </style> """, unsafe_allow_html=True)
 
     st.title("Machine Learning Model Demo")
-    st.markdown("""To test the model, you have two options:
-
-- **Upload an Image**: Select an image of your choice and click the 'Predict' button to see the model's prediction.
+    st.markdown("""<h5 style="word-spacing: 10px"><a href='https://colab.research.google.com/drive/1GRI-4-qkjm6P5w4fGbnLuix43o4zBSNr?usp=sharing' style="color: #FFC500">Notebok</a> <a style="color: #FFC500" href='https://github.com/nehayj100/Traffic-Sign-Recognition-Using-the-GTSRB-Dataset'>GitHub</a></h5>""",unsafe_allow_html=True)
+    st.markdown("""**To test the model, you have two options:**
+- **Upload an Image**: Select an image of your choice and click the 'Run Model' button to see the model's prediction.
 - **Surprise Me**: Let the model randomly select 5 images from the test dataset and display their predictions.""")
     # Example inputs for the model
     input_1 = st.file_uploader(label='', accept_multiple_files=False, help='Please upload the image in ppm format only')
