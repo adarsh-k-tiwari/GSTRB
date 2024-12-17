@@ -171,7 +171,7 @@ if st.session_state.page == 'landing':
     st.markdown('<div style="text-align: center; font-size: 8em; line-height:95%;font-family: Roboto, sans-serif; font-weight: 900; font-style: normal;"><strong>Traffic Sign</strong><br><div style="color: #FFC500"><strong>Recognition</strong></div></div>', unsafe_allow_html=True)
     st.markdown('<h4 style="text-align: center; color: #A9A9A9"><br>Harnessing the GTSRB Dataset for Smarter Navigation and Safer Roads</h4>', unsafe_allow_html=True)
     # Styling the landing page buttons
-    st.markdown("""<h5 style="text-align: center; word-spacing: 10px"><a href='https://colab.research.google.com/drive/1GRI-4-qkjm6P5w4fGbnLuix43o4zBSNr?usp=sharing' style="color: #FFC500">Notebok</a> <a style="color: #FFC500" href='https://github.com/nehayj100/Traffic-Sign-Recognition-Using-the-GTSRB-Dataset'>GitHub</a></h5>""",unsafe_allow_html=True)
+    st.markdown("""<h5 style="text-align: center; word-spacing: 10px"><a href='https://colab.research.google.com/drive/1GRI-4-qkjm6P5w4fGbnLuix43o4zBSNr?usp=sharing' style="color: #FFC500">Notebook</a> <a style="color: #FFC500" href='https://github.com/nehayj100/Traffic-Sign-Recognition-Using-the-GTSRB-Dataset'>GitHub</a></h5>""",unsafe_allow_html=True)
     st.markdown(f"""
     <style>
         div.stButton > button:first-child {{
@@ -233,9 +233,9 @@ elif st.session_state.page == 'research':
         }}
     </style> """, unsafe_allow_html=True)
     st.markdown('<h1 style="text-align: center;">Harnessing the GTSRB Dataset for Smarter Navigation and Safer Roads</h1>', unsafe_allow_html=True)
-    st.markdown("""<h5 style="text-align: center; word-spacing: 10px"><a href='https://colab.research.google.com/drive/1GRI-4-qkjm6P5w4fGbnLuix43o4zBSNr?usp=sharing' style="color: #FFC500">Notebok</a> <a style="color: #FFC500" href='https://github.com/nehayj100/Traffic-Sign-Recognition-Using-the-GTSRB-Dataset'>GitHub</a></h5>""",unsafe_allow_html=True)
+    st.markdown("""<h5 style="text-align: center; word-spacing: 10px"><a href='https://colab.research.google.com/drive/1GRI-4-qkjm6P5w4fGbnLuix43o4zBSNr?usp=sharing' style="color: #FFC500">Notebook</a> <a style="color: #FFC500" href='https://github.com/nehayj100/Traffic-Sign-Recognition-Using-the-GTSRB-Dataset'>GitHub</a></h5>""",unsafe_allow_html=True)
     st.latex(
-        r'''{Adarsh\>Kumar}\qquad{Hwiyoon\>Kim}\qquad {Jonathan\>Gover}\qquad{Neha\>Joshi}\qquad{Neil\>Roy}''')
+        r'''{Adarsh\>Kumar}''')
     
     # Content for the blog post
     st.subheader("Abstract")
@@ -339,7 +339,7 @@ elif st.session_state.page == 'demo':
     </style> """, unsafe_allow_html=True)
 
     st.title("Machine Learning Model Demo")
-    st.markdown("""<h5 style="word-spacing: 10px"><a href='https://colab.research.google.com/drive/1GRI-4-qkjm6P5w4fGbnLuix43o4zBSNr?usp=sharing' style="color: #FFC500">Notebok</a> <a style="color: #FFC500" href='https://github.com/nehayj100/Traffic-Sign-Recognition-Using-the-GTSRB-Dataset'>GitHub</a></h5>""",unsafe_allow_html=True)
+    st.markdown("""<h5 style="word-spacing: 10px"><a href='https://colab.research.google.com/drive/1GRI-4-qkjm6P5w4fGbnLuix43o4zBSNr?usp=sharing' style="color: #FFC500">Notebook</a> <a style="color: #FFC500" href='https://github.com/nehayj100/Traffic-Sign-Recognition-Using-the-GTSRB-Dataset'>GitHub</a></h5>""",unsafe_allow_html=True)
     st.markdown("""**To test the model, you have two options:**
 - **Upload an Image**: Select an image of your choice and click the 'Run Model' button to see the model's prediction.
 - **Surprise Me**: Let the model randomly select 5 images from the test dataset and display their predictions.""")
